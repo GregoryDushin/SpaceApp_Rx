@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class LaunchCell: UICollectionViewCell {
     @IBOutlet private var rocketNameLabel: UILabel!
     @IBOutlet private var dateOfLaunchLabel: UILabel!
