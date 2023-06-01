@@ -34,6 +34,9 @@
 		F31B3A4D2A261E5C000D9CE6 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31B3A482A261E5C000D9CE6 /* SettingsTableViewCell.swift */; };
 		F31B3A4E2A261E5C000D9CE6 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31B3A492A261E5C000D9CE6 /* SettingsModel.swift */; };
 		F31B3A4F2A261E5C000D9CE6 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31B3A4A2A261E5C000D9CE6 /* SettingsRepository.swift */; };
+		F36C91592A28D02400839B58 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C91582A28D02400839B58 /* LaunchViewModel.swift */; };
+		F36C915B2A28D03000839B58 /* LaunchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C915A2A28D03000839B58 /* LaunchCell.swift */; };
+		F36C915D2A28D09100839B58 /* LaunchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C915C2A28D09100839B58 /* LaunchData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		F31B3A482A261E5C000D9CE6 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F31B3A492A261E5C000D9CE6 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		F31B3A4A2A261E5C000D9CE6 /* SettingsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
+		F36C91582A28D02400839B58 /* LaunchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		F36C915A2A28D03000839B58 /* LaunchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCell.swift; sourceTree = "<group>"; };
+		F36C915C2A28D09100839B58 /* LaunchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +204,9 @@
 				F31B3A412A261E37000D9CE6 /* LaunchLoader.swift */,
 				F31B3A402A261E37000D9CE6 /* LaunchModel.swift */,
 				F31B3A3F2A261E37000D9CE6 /* LaunchViewController.swift */,
+				F36C91582A28D02400839B58 /* LaunchViewModel.swift */,
+				F36C915A2A28D03000839B58 /* LaunchCell.swift */,
+				F36C915C2A28D09100839B58 /* LaunchData.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 				F31B3A382A261DF7000D9CE6 /* RocketViewModel.swift in Sources */,
 				F31B3A222A261D8C000D9CE6 /* RocketLoader.swift in Sources */,
 				F31B3A4E2A261E5C000D9CE6 /* SettingsModel.swift in Sources */,
+				F36C91592A28D02400839B58 /* LaunchViewModel.swift in Sources */,
 				F31B3A262A261D93000D9CE6 /* RoketData.swift in Sources */,
 				F31B3A4C2A261E5C000D9CE6 /* SettingsViewController.swift in Sources */,
 				F31B3A352A261DD2000D9CE6 /* RocketLaunchButtonCell.swift in Sources */,
@@ -371,6 +381,7 @@
 				F31B39F02A260B7B000D9CE6 /* SceneDelegate.swift in Sources */,
 				F31B3A4D2A261E5C000D9CE6 /* SettingsTableViewCell.swift in Sources */,
 				F31B3A432A261E37000D9CE6 /* LaunchModel.swift in Sources */,
+				F36C915D2A28D09100839B58 /* LaunchData.swift in Sources */,
 				F31B3A312A261DD2000D9CE6 /* RocketVerticalInfoCell.swift in Sources */,
 				F31B3A2A2A261DB9000D9CE6 /* CustomPageViewController.swift in Sources */,
 				F31B3A342A261DD2000D9CE6 /* RocketHorizontalInfoCell.swift in Sources */,
@@ -378,6 +389,7 @@
 				F31B3A3B2A261E12000D9CE6 /* Constants.swift in Sources */,
 				F31B3A1F2A261D1E000D9CE6 /* RocketViewController.swift in Sources */,
 				F31B3A332A261DD2000D9CE6 /* RocketImageCell.swift in Sources */,
+				F36C915B2A28D03000839B58 /* LaunchCell.swift in Sources */,
 				F31B3A422A261E37000D9CE6 /* LaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

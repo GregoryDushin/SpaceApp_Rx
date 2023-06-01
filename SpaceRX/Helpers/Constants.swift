@@ -1,5 +1,3 @@
-
-
 import Foundation
 
 enum LaunchImages {
@@ -19,4 +17,3 @@ enum PersistancePositionKeys {
     static let massPositionKey = "Persistance.massPositionKey"
     static let capacityPositionKey = "Persistance.capaciryPositionKey"
 }
-
