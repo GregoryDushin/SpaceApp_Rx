@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
 
     @IBOutlet private var settingsTableView: UITableView!
     private let disposeBag = DisposeBag()
