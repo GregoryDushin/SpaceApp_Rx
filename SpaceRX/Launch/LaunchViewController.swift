@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxRelay
 import RxCocoa
 
 final class LaunchViewController: UIViewController {
@@ -31,21 +30,19 @@ final class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.errorObservable
-            .subscribe { [weak self] (event: Event<String>) in
-                if let errorMessage = event.element {
-                    self?.showAlert(errorMessage)
-                }
+        viewModel.errorDriver
+            .drive(onNext: { [weak self] errorMessage in
+                self?.showAlert(errorMessage)
             }
+            )
             .disposed(by: disposeBag)
 
-        viewModel.launchArrayObservable
-            .subscribe { [weak self] event in
-                if let launchArray = event.element {
-                    self?.launches = launchArray
-                    self?.launchCollectionView.reloadData()
-                }
+        viewModel.launchArrayDriver
+            .drive(onNext: { [weak self] launchArray in
+                self?.launches = launchArray
+                self?.launchCollectionView.reloadData()
             }
+            )
             .disposed(by: disposeBag)
     }
 
