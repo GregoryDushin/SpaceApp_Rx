@@ -9,18 +9,17 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+final class SettingsViewModel {
 
-final class SettingsPresenter {
-    
     private let defaults = UserDefaults.standard
     private let onUpdateSetting: (() -> Void)
     private let settingsRepository: SettingsRepositoryProtocol
     private let settingsArray = BehaviorRelay<[Setting]>(value: [])
-    
+
     var settingsArrayObservable: Observable<[Setting]> {
-        return settingsArray.asObservable()
+        settingsArray.asObservable()
     }
-    
+
     private func configureSettingsArray() {
         let settingsArrayValue = [
             Setting(
@@ -46,13 +45,13 @@ final class SettingsPresenter {
         ]
         settingsArray.accept(settingsArrayValue)
     }
-    
+
     init(onUpdateSetting: @escaping (() -> Void), settingsRepository: SettingsRepositoryProtocol) {
         self.onUpdateSetting = onUpdateSetting
         self.settingsRepository = settingsRepository
         configureSettingsArray()
     }
-    
+
     func saveData(selectedIndex: Int, indexPath: Int) {
         settingsRepository.set(setting: settingsArray.value[indexPath].positionKey, value: String(selectedIndex))
         onUpdateSetting()

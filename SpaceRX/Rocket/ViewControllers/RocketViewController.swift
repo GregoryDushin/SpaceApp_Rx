@@ -10,10 +10,8 @@ import RxCocoa
 import RxSwift
 
 final class RocketViewController: UIViewController {
-    
-    @IBOutlet var collectionView: UICollectionView!
-    
-    
+
+    @IBOutlet private var collectionView: UICollectionView!
     typealias DataSource = UICollectionViewDiffableDataSource<Section, ListItem>
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, ListItem>
 
@@ -21,23 +19,21 @@ final class RocketViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private lazy var dataSource = configureCollectionViewDataSource()
     private var snapshot = DataSourceSnapshot()
+    private var viewModel: RocketViewModel!
     var index: Int = 0
     var id = ""
     var rocketData: RocketModelElement!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hui rocket")
-        let viewModel = RocketViewModel(rocketData: rocketData, settingsRepository: SettingsRepository())
+        viewModel = RocketViewModel(rocketData: rocketData, settingsRepository: SettingsRepository())
         viewModel.settingsUpdated.accept(())
-        viewModel.sectionsObservable
-            .drive(onNext: { sections in
-                self.present(data: sections)
-                print(sections)
+        viewModel.sections
+            .drive { [weak self] sections in
+                self?.present(data: sections)
             }
-            )
             .disposed(by: disposeBag)
-        
+
         collectionView.collectionViewLayout = createLayout()
         configureHeader()
     }
@@ -92,7 +88,7 @@ final class RocketViewController: UIViewController {
             snapshot.appendSections([section])
             snapshot.appendItems(section.items, toSection: section)
         }
-        
+
         dataSource.apply(snapshot)
     }
 
@@ -162,33 +158,19 @@ final class RocketViewController: UIViewController {
     }
 
 //    // MARK: - Data transfer between View Controllers
-//
-//    @IBSegueAction
-//    func transferLaunchInfo(_ coder: NSCoder) -> LaunchViewController? {
-//        let presenter = LaunchPresenter(launchLoader: LaunchLoader(), id: id)
-//
-//        return LaunchViewController(coder: coder, presenter: presenter)
-//    }
-//
-//    @IBSegueAction
-//    func transferSettingsInfo(_ coder: NSCoder) -> SettingsViewController? {
-//        let presenter = SettingsPresenter(onUpdateSetting: { [weak self] in
-//            guard let self = self else { return }
-//            self.presenter.getData() }, settingsRepository: settings)
-//
-//        return SettingsViewController(coder: coder, presenter: presenter)
-//    }
-}
 
-//extension RocketViewController: RocketViewProtocol {
-//    func present(data: [Section]) {
-//        var snapshot = DataSourceSnapshot()
-//        snapshot = DataSourceSnapshot()
-//        for section in data {
-//            snapshot.appendSections([section])
-//            snapshot.appendItems(section.items, toSection: section)
-//        }
-//
-//        dataSource.apply(snapshot)
-//    }
-//}
+    @IBSegueAction
+    func transferLaunchInfo(_ coder: NSCoder) -> LaunchViewController? {
+        let viewModel = LaunchViewModel(id: self.id)
+        return LaunchViewController(coder: coder, viewModel: viewModel)
+    }
+
+    @IBSegueAction
+    func transferSettingsInfo(_ coder: NSCoder) -> SettingsViewController? {
+        let viewModel = SettingsViewModel(onUpdateSetting: { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.settingsUpdated.accept(())
+        }, settingsRepository: settings)
+        return SettingsViewController(coder: coder, viewModel: viewModel)
+    }
+}

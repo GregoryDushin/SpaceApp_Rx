@@ -8,11 +8,11 @@
 import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
-    
-    @IBOutlet var settingsLabel: UILabel!
-    
-    @IBOutlet var settingsSegmentedControl: UISegmentedControl!
-    
+
+    @IBOutlet private var settingsLabel: UILabel!
+
+    @IBOutlet private var settingsSegmentedControl: UISegmentedControl!
+
     var onSettingChanged: ((Int) -> Void)?
 
     override func awakeFromNib() {

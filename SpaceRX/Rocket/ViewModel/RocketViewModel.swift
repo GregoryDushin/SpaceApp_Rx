@@ -7,39 +7,35 @@
 
 import Foundation
 import RxSwift
-import RxRelay
 import RxCocoa
 
 final class RocketViewModel {
-    
+
     private let disposeBag = DisposeBag()
     private let settingsRepository: SettingsRepositoryProtocol
     private let rocket: RocketModelElement
-    private let outputSubject = BehaviorRelay<[Section]>(value: [])
-    public let settingsUpdated = PublishRelay<Void>()
-    
-    var sectionsObservable: Driver<[Section]> {
-        return outputSubject.asDriver()
+  //  private let rocketsSubject = PublishRelay<[Section]>() // не приходят секции
+    private let rocketsSubject = BehaviorRelay<[Section]>(value: [])
+    let settingsUpdated = PublishRelay<Void>()
+
+    var sections: Driver<[Section]> {
+        rocketsSubject.asDriver(onErrorJustReturn: [])
     }
-    
+
     init(rocketData: RocketModelElement, settingsRepository: SettingsRepositoryProtocol) {
         self.rocket = rocketData
         self.settingsRepository = settingsRepository
         setupBindings()
     }
-    
+
     private func setupBindings() {
         settingsUpdated
-            .map { [weak self] _ -> [Section] in
-                guard let self = self else { return []
-                }
-                return self.configureSections()
-            }
-            .bind(to: outputSubject)
+            .map { [weak self] _ in self?.createSections() ?? [] }
+            .bind(to: rocketsSubject)
             .disposed(by: disposeBag)
     }
-    
-    private func configureSections() -> [Section] {
+
+    private func createSections() -> [Section] {
         let heightName: String
         let heightValue: String
         let diamName: String
@@ -48,7 +44,7 @@ final class RocketViewModel {
         let massValue: String
         let capacityName: String
         let capacityValue: String
-        
+
         if settingsRepository.get(setting: PersistancePositionKeys.heightPositionKey) == "1" {
             heightName = "Высота, ft"
             heightValue = String(rocket.height.feet ?? 0.0)
@@ -56,7 +52,7 @@ final class RocketViewModel {
             heightName = "Высота, m"
             heightValue = String(rocket.height.meters ?? 0.0)
         }
-        
+
         if settingsRepository.get(setting: PersistancePositionKeys.diameterPositionKey) == "1" {
             diamName = "Диаметр, ft"
             diamValue = String(rocket.diameter.feet ?? 0.0)
@@ -64,7 +60,7 @@ final class RocketViewModel {
             diamName = "Диаметр, m"
             diamValue = String(rocket.diameter.meters ?? 0.0)
         }
-        
+
         if settingsRepository.get(setting: PersistancePositionKeys.massPositionKey) == "1" {
             massName = "Масса, lb"
             massValue = String(rocket.mass.lb)
@@ -72,7 +68,7 @@ final class RocketViewModel {
             massName = "Масса, kg"
             massValue = String(rocket.mass.kg)
         }
-        
+
         if settingsRepository.get(setting: PersistancePositionKeys.capacityPositionKey) == "1" {
             capacityName = "Масса, lb"
             capacityValue = String(rocket.payloadWeights[0].lb)
@@ -80,7 +76,7 @@ final class RocketViewModel {
             capacityName = "Масса, kg"
             capacityValue = String(rocket.payloadWeights[0].kg)
         }
-        
+
         let sections = [
             Section(
                 sectionType: .horizontal,
@@ -164,7 +160,7 @@ final class RocketViewModel {
             ),
             Section(sectionType: .button, title: nil, items: [.button])
         ]
-        
+
         if let url = URL(string: rocket.flickrImages[0]) {
             let section = Section(
                 sectionType: .image,
@@ -173,7 +169,7 @@ final class RocketViewModel {
             )
             return [section] + sections
         }
-        
+
         return sections
     }
 }
