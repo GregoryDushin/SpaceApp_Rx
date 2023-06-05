@@ -6,17 +6,23 @@
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
+import RxCocoa
 
 final class LaunchViewModel {
     private let launchLoader = LaunchLoader()
     private let id: String
     private let disposeBag = DisposeBag()
-    private let errorRelay = PublishRelay<String>()
-    private let lastErrorSubject: Observable<String>
-    private let launchRelay = PublishRelay<[LaunchData]>()
-    private let lastLaunchArraySubject: Observable<[LaunchData]>
+    private let launchArray = BehaviorRelay<[LaunchData]>(value: [])
+    private let errorSubject = BehaviorRelay<String>(value: "")
+
+    var errorDriver: Driver<String> {
+        errorSubject.asDriver()
+    }
+
+    var launchArrayDriver: Driver<[LaunchData]> {
+        launchArray.asDriver()
+    }
 
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -24,22 +30,8 @@ final class LaunchViewModel {
         return dateFormatter
     }()
 
-    var errorDriver: Driver<String> {
-        lastErrorSubject.asDriver(onErrorJustReturn: "")
-    }
-
-    var launchArrayDriver: Driver<[LaunchData]> {
-        lastLaunchArraySubject.asDriver(onErrorJustReturn: [])
-    }
-
     required init(id: String) {
         self.id = id
-        self.lastErrorSubject = errorRelay
-            .asObservable()
-            .share(replay: 1)
-        self.lastLaunchArraySubject = launchRelay
-            .asObservable()
-            .share(replay: 1)
         getData()
     }
 
@@ -52,12 +44,11 @@ final class LaunchViewModel {
                 },
                 onFailure: { [weak self] error in
                     let errorMessage = error.localizedDescription
-                    self?.errorRelay.accept(errorMessage)
+                    self?.errorSubject.accept(errorMessage)
                 }
             )
             .disposed(by: disposeBag)
     }
-
     private func transferDataIntoLaunchVC(_ launchModel: [LaunchModelElement]) {
 
         let data: [LaunchData] = launchModel.map {
@@ -77,6 +68,6 @@ final class LaunchViewModel {
             return launchData
         }
 
-        launchRelay.accept(data)
+        launchArray.accept(data)
     }
 }
