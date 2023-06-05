@@ -34,7 +34,8 @@ final class LaunchViewController: UIViewController {
             .drive(onNext: { [weak self] errorMessage in
                 guard let self = self else { return }
                 self.showAlert(errorMessage)
-            })
+            }
+            )
             .disposed(by: disposeBag)
 
         viewModel.launchArrayDriver
@@ -42,7 +43,8 @@ final class LaunchViewController: UIViewController {
                 guard let self = self else { return }
                 self.launches = launchArray
                 self.launchCollectionView.reloadData()
-            })
+            }
+            )
             .disposed(by: disposeBag)
     }
 

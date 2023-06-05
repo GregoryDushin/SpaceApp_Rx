@@ -53,7 +53,7 @@
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="settings"/>
                                                             <connections>
-                                                                <segue destination="de6-jk-AZ5" kind="show" destinationCreationSelector="transferSettingsInfo:" id="TyC-fY-W6w"/>
+                                                                <segue destination="de6-jk-AZ5" kind="presentation" destinationCreationSelector="transferSettingsInfo:" id="TyC-fY-W6w"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -234,32 +234,43 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5Kf-jW-9bX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsTableViewCell" id="Ssl-Xk-BKk" customClass="SettingsTableViewCell" customModule="SpaceRX" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsTableViewCell" rowHeight="70" id="Ssl-Xk-BKk" customClass="SettingsTableViewCell" customModule="SpaceRX" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ssl-Xk-BKk" id="88l-Cc-2ll">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5H-vW-ukN">
-                                                    <rect key="frame" x="11" y="11" width="74" height="33"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5H-vW-ukN">
+                                                    <rect key="frame" x="11" y="15" width="50" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="b77-Ad-KL4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qao-Df-wqg">
-                                                    <rect key="frame" x="357" y="7" width="37" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qao-Df-wqg">
+                                                    <rect key="frame" x="313" y="15" width="81" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="6DZ-vy-qKi"/>
+                                                    </constraints>
                                                     <segments>
-                                                        <segment title=""/>
-                                                        <segment title=""/>
+                                                        <segment title="" width="40"/>
+                                                        <segment title="" width="40"/>
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Qao-Df-wqg" secondAttribute="trailing" constant="20" id="7Xu-Iz-XMf"/>
+                                                <constraint firstItem="M5H-vW-ukN" firstAttribute="leading" secondItem="88l-Cc-2ll" secondAttribute="leading" constant="11" id="BFU-90-RZa"/>
+                                                <constraint firstItem="M5H-vW-ukN" firstAttribute="centerY" secondItem="88l-Cc-2ll" secondAttribute="centerY" id="KUb-YT-zfL"/>
+                                                <constraint firstItem="Qao-Df-wqg" firstAttribute="centerY" secondItem="88l-Cc-2ll" secondAttribute="centerY" id="zhm-IK-OVH"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="settingsLabel" destination="M5H-vW-ukN" id="E8c-4j-sYK"/>
                                             <outlet property="settingsSegmentedControl" destination="Qao-Df-wqg" id="DAm-41-k1L"/>
@@ -273,7 +284,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oVZ-8f-hx5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5Kf-jW-9bX" firstAttribute="leading" secondItem="oVZ-8f-hx5" secondAttribute="leading" id="1bx-mj-ItU"/>
                             <constraint firstItem="5Kf-jW-9bX" firstAttribute="trailing" secondItem="oVZ-8f-hx5" secondAttribute="trailing" id="f1F-zQ-9ep"/>

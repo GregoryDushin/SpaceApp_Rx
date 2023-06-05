@@ -35,6 +35,7 @@ final class RocketLoader {
                     throw error
                 }
             }
+
             .asSingle()
     }
 }

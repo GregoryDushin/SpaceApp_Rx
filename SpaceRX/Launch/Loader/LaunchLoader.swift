@@ -39,6 +39,7 @@ final class LaunchLoader {
                     throw error
                 }
             }
+
             .asSingle()
     }
 }

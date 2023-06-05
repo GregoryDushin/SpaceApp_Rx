@@ -126,14 +126,12 @@
 		F31B39EC2A260B7B000D9CE6 /* SpaceRX */ = {
 			isa = PBXGroup;
 			children = (
-				F31B3A452A261E48000D9CE6 /* Settings */,
-				F31B3A3E2A261E24000D9CE6 /* Launch */,
-				F31B3A392A261E06000D9CE6 /* Helpers */,
 				F31B3A202A261D50000D9CE6 /* Rocket */,
-				F31B39ED2A260B7B000D9CE6 /* AppDelegate.swift */,
-				F31B39EF2A260B7B000D9CE6 /* SceneDelegate.swift */,
+				F31B3A3E2A261E24000D9CE6 /* Launch */,
+				F31B3A452A261E48000D9CE6 /* Settings */,
+				F3CFE0212A2E596700D2AC89 /* Resources */,
+				F31B3A392A261E06000D9CE6 /* Helpers */,
 				F31B39F32A260B7B000D9CE6 /* Main.storyboard */,
-				F31B39F62A260B7E000D9CE6 /* Assets.xcassets */,
 				F31B39F82A260B7E000D9CE6 /* LaunchScreen.storyboard */,
 				F31B39FB2A260B7E000D9CE6 /* Info.plist */,
 			);
@@ -201,12 +199,11 @@
 		F31B3A3E2A261E24000D9CE6 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				F31B3A412A261E37000D9CE6 /* LaunchLoader.swift */,
-				F31B3A402A261E37000D9CE6 /* LaunchModel.swift */,
-				F31B3A3F2A261E37000D9CE6 /* LaunchViewController.swift */,
-				F36C91582A28D02400839B58 /* LaunchViewModel.swift */,
-				F36C915A2A28D03000839B58 /* LaunchCell.swift */,
-				F36C915C2A28D09100839B58 /* LaunchData.swift */,
+				F3CFE01C2A2E58DA00D2AC89 /* Loader */,
+				F3CFE01B2A2E58CD00D2AC89 /* ViewController */,
+				F3CFE01A2A2E58C500D2AC89 /* Cell */,
+				F3CFE0192A2E58B400D2AC89 /* ViewModel */,
+				F3CFE0182A2E58A300D2AC89 /* Models */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -214,11 +211,10 @@
 		F31B3A452A261E48000D9CE6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F31B3A492A261E5C000D9CE6 /* SettingsModel.swift */,
-				F31B3A4A2A261E5C000D9CE6 /* SettingsRepository.swift */,
-				F31B3A482A261E5C000D9CE6 /* SettingsTableViewCell.swift */,
-				F31B3A472A261E5C000D9CE6 /* SettingsViewController.swift */,
-				F31B3A462A261E5C000D9CE6 /* SettingsViewModel.swift */,
+				F3CFE0202A2E594100D2AC89 /* Models */,
+				F3CFE01F2A2E592400D2AC89 /* Cell */,
+				F3CFE01E2A2E591B00D2AC89 /* ViewModel */,
+				F3CFE01D2A2E590F00D2AC89 /* ViewController */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -230,6 +226,90 @@
 				F31B3A252A261D93000D9CE6 /* RoketData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F3CFE0182A2E58A300D2AC89 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F36C915C2A28D09100839B58 /* LaunchData.swift */,
+				F31B3A402A261E37000D9CE6 /* LaunchModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3CFE0192A2E58B400D2AC89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F36C91582A28D02400839B58 /* LaunchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F3CFE01A2A2E58C500D2AC89 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F36C915A2A28D03000839B58 /* LaunchCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F3CFE01B2A2E58CD00D2AC89 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A3F2A261E37000D9CE6 /* LaunchViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F3CFE01C2A2E58DA00D2AC89 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A412A261E37000D9CE6 /* LaunchLoader.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		F3CFE01D2A2E590F00D2AC89 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A472A261E5C000D9CE6 /* SettingsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F3CFE01E2A2E591B00D2AC89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A462A261E5C000D9CE6 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F3CFE01F2A2E592400D2AC89 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A482A261E5C000D9CE6 /* SettingsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F3CFE0202A2E594100D2AC89 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F31B3A492A261E5C000D9CE6 /* SettingsModel.swift */,
+				F31B3A4A2A261E5C000D9CE6 /* SettingsRepository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3CFE0212A2E596700D2AC89 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F31B39ED2A260B7B000D9CE6 /* AppDelegate.swift */,
+				F31B39EF2A260B7B000D9CE6 /* SceneDelegate.swift */,
+				F31B39F62A260B7E000D9CE6 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
