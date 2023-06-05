@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class LaunchViewModel {
     private let launchLoader = LaunchLoader()
@@ -46,7 +46,8 @@ final class LaunchViewModel {
                 onFailure: { [weak self] error in
                     let errorMessage = error.localizedDescription
                     self?.errorSubject.accept(errorMessage)
-                })
+                }
+            )
             .disposed(by: disposeBag)
     }
     private func transferDataIntoLaunchVC(_ launchModel: [LaunchModelElement]) {

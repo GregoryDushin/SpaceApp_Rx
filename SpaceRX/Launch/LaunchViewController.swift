@@ -32,17 +32,17 @@ final class LaunchViewController: UIViewController {
 
         viewModel.errorDriver
             .drive(onNext: { [weak self] errorMessage in
-                self?.showAlert(errorMessage)
-            }
-            )
+                guard let self = self else { return }
+                self.showAlert(errorMessage)
+            })
             .disposed(by: disposeBag)
 
         viewModel.launchArrayDriver
             .drive(onNext: { [weak self] launchArray in
-                self?.launches = launchArray
-                self?.launchCollectionView.reloadData()
-            }
-            )
+                guard let self = self else { return }
+                self.launches = launchArray
+                self.launchCollectionView.reloadData()
+            })
             .disposed(by: disposeBag)
     }
 
