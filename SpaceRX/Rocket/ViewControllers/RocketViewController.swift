@@ -29,9 +29,10 @@ final class RocketViewController: UIViewController {
         viewModel = RocketViewModel(rocketData: rocketData, settingsRepository: SettingsRepository())
         viewModel.settingsUpdated.accept(())
         viewModel.sections
-            .drive { [weak self] sections in
+            .drive(onNext: { [weak self] sections in
                 self?.present(data: sections)
             }
+            )
             .disposed(by: disposeBag)
 
         collectionView.collectionViewLayout = createLayout()
