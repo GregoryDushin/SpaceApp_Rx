@@ -5,7 +5,6 @@
 //  Created by Григорий Душин on 29.11.2022.
 //
 
-import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
@@ -15,14 +14,14 @@ final class LaunchViewModel {
     private let id: String
     private let disposeBag = DisposeBag()
     private let launchArray = BehaviorRelay<[LaunchData]>(value: [])
-    private let errorSubject = PublishSubject<String>()
+    private let errorSubject = BehaviorRelay<String>(value: "")
 
-    var errorObservable: Observable<String> {
-        errorSubject.asObservable()
+    var errorDriver: Driver<String> {
+        errorSubject.asDriver()
     }
 
-    var launchArrayObservable: Observable<[LaunchData]> {
-        launchArray.asObservable()
+    var launchArrayDriver: Driver<[LaunchData]> {
+        launchArray.asDriver()
     }
 
     private let dateFormatter: DateFormatter = {
@@ -38,24 +37,21 @@ final class LaunchViewModel {
 
     func getData() {
         launchLoader.loadLaunchData(id: id)
-        .observe(on: MainScheduler.instance)
-        .subscribe( onSuccess: { launches in
-            self.transferDataIntoLaunchVC(launches)
-        }, onFailure: { error in
-            self.handleError(error)
-        })
-        .disposed(by: disposeBag)
-}
-
-    private func handleError(_ error: Error) {
-            let errorMessage = error.localizedDescription
-            errorSubject.onNext(errorMessage)
-        }
-
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                onSuccess: { [weak self] launches in
+                    self?.transferDataIntoLaunchVC(launches)
+                },
+                onFailure: { [weak self] error in
+                    let errorMessage = error.localizedDescription
+                    self?.errorSubject.accept(errorMessage)
+                }
+            )
+            .disposed(by: disposeBag)
+    }
     private func transferDataIntoLaunchVC(_ launchModel: [LaunchModelElement]) {
-        var data = [LaunchData]()
 
-        launchModel.map {
+        let data: [LaunchData] = launchModel.map {
             let launchImage: UIImage
 
             if let launchingResult = $0.success {
@@ -69,8 +65,9 @@ final class LaunchViewModel {
                 date: dateFormatter.string(from: $0.dateUtc),
                 image: launchImage
             )
-            data.append(launchData)
+            return launchData
         }
+
         launchArray.accept(data)
     }
 }

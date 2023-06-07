@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class RocketViewModel {
 
     private let disposeBag = DisposeBag()
     private let settingsRepository: SettingsRepositoryProtocol
     private let rocket: RocketModelElement
-  //  private let rocketsSubject = PublishRelay<[Section]>() // не приходят секции
-    private let rocketsSubject = BehaviorRelay<[Section]>(value: [])
+    private let rocketsSubject = PublishRelay<[Section]>()
+    private let rocketsObservable: Observable<[Section]>
     let settingsUpdated = PublishRelay<Void>()
 
     var sections: Driver<[Section]> {
@@ -25,6 +25,9 @@ final class RocketViewModel {
     init(rocketData: RocketModelElement, settingsRepository: SettingsRepositoryProtocol) {
         self.rocket = rocketData
         self.settingsRepository = settingsRepository
+        self.rocketsObservable = rocketsSubject
+            .asObservable()
+            .share(replay: 1)
         setupBindings()
     }
 

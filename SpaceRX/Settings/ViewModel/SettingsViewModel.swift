@@ -6,21 +6,23 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class SettingsViewModel {
 
     private let defaults = UserDefaults.standard
     private let onUpdateSetting: (() -> Void)
     private let settingsRepository: SettingsRepositoryProtocol
-    private let settingsArray = BehaviorRelay<[Setting]>(value: [])
+    var settingsArray: Driver<[Setting]>!
 
-    var settingsArrayObservable: Observable<[Setting]> {
-        settingsArray.asObservable()
+    init(onUpdateSetting: @escaping (() -> Void), settingsRepository: SettingsRepositoryProtocol) {
+        self.onUpdateSetting = onUpdateSetting
+        self.settingsRepository = settingsRepository
+        self.settingsArray = Driver.just(configureSettingsArray())
     }
 
-    private func configureSettingsArray() {
+    private func configureSettingsArray() -> [Setting] {
         let settingsArrayValue = [
             Setting(
                 title: "Высота",
@@ -43,17 +45,11 @@ final class SettingsViewModel {
                 values: ["kg", "lb"]
             )
         ]
-        settingsArray.accept(settingsArrayValue)
-    }
-
-    init(onUpdateSetting: @escaping (() -> Void), settingsRepository: SettingsRepositoryProtocol) {
-        self.onUpdateSetting = onUpdateSetting
-        self.settingsRepository = settingsRepository
-        configureSettingsArray()
+        return settingsArrayValue
     }
 
     func saveData(selectedIndex: Int, indexPath: Int) {
-        settingsRepository.set(setting: settingsArray.value[indexPath].positionKey, value: String(selectedIndex))
+        settingsRepository.set(setting: configureSettingsArray()[indexPath].positionKey, value: String(selectedIndex))
         onUpdateSetting()
     }
 }

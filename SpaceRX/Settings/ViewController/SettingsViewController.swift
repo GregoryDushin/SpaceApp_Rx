@@ -30,13 +30,10 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.settingsArrayObservable
-            .subscribe { [weak self] event in
-                if let settingsArray = event.element {
-                    self?.settingsArray = settingsArray
-                    self?.settingsTableView.reloadData()
-                }
-            }
+        viewModel.settingsArray?
+            .drive(onNext: { [weak self] settingsArray in
+                self?.settingsArray = settingsArray
+            })
             .disposed(by: disposeBag)
     }
 }
