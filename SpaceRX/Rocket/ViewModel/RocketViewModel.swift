@@ -14,16 +14,22 @@ final class RocketViewModel {
     private let disposeBag = DisposeBag()
     private let settingsRepository: SettingsRepositoryProtocol
     private let rocket: RocketModelElement
-    private let rocketsSubject = BehaviorRelay<[Section]>(value: [])
+//    private let rocketsSubject = BehaviorRelay<[Section]>(value: [])
     let settingsUpdated = PublishRelay<Void>()
 
+    private let rocketsSubject = PublishRelay<[Section]>()
+    private let rocketsObservable: Observable<[Section]>
+
     var sections: Driver<[Section]> {
-        return rocketsSubject.asDriver()
+        rocketsSubject.asDriver(onErrorJustReturn: [])
     }
 
     init(rocketData: RocketModelElement, settingsRepository: SettingsRepositoryProtocol) {
         self.rocket = rocketData
         self.settingsRepository = settingsRepository
+        self.rocketsObservable = rocketsSubject
+            .asObservable()
+            .share(replay: 1)
         setupBindings()
     }
 
