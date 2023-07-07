@@ -14,7 +14,7 @@
 * MVVM design pattern
 * Alamofire
 * UserDefaults
-* Multithreading with GCD
+* GCD
 * Networking with URLSession
 * UITableView and UICollectionView
 * UICompositionalLayout
